@@ -21,7 +21,7 @@ function Message({ message }) {
     >
       <div>
         <img
-          className="w-14 h-14 rounded-full object-cover mr-2"
+          className="w-14 h-14 rounded-full object-cover"
           src={
             message.senderId === currentUser.uid
               ? currentUser.photoURL
@@ -41,7 +41,7 @@ function Message({ message }) {
       >
         {message.text && (
           <p
-            className={`px-3 pt-2 pb-1 mt-3 max-w-max ${
+            className={`px-3 pt-2 pb-1 mt-2 max-w-max ${
               message.senderId === currentUser.uid
                 ? "rounded-b-md rounded-tl-md bg-red-700"
                 : "rounded-b-md rounded-tr-md bg-green-900"
@@ -50,7 +50,7 @@ function Message({ message }) {
             {message.text}
           </p>
         )}
-        {message.image && <img className="w-1/2" src={message.image} />}
+        {message.image && <img className="w-1/2 rounded-md" src={message.image} />}
       </div>
     </div>
   )

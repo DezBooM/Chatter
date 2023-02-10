@@ -92,7 +92,10 @@ function Search() {
               className="w-14 h-14 rounded-full object-cover"
               src={user.photoURL}
             />
-            <span className="font-bold text-lg">{user.displayName?.charAt(0).toUpperCase() + user.displayName?.slice(1)}</span>
+            <span className="font-bold text-lg">
+              {user.displayName?.charAt(0).toUpperCase() +
+                user.displayName?.slice(1)}
+            </span>
           </div>
         )}
       </div>
