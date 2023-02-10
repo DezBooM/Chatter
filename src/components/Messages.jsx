@@ -20,9 +20,9 @@ function Messages() {
 
   return (
     <div className="h-[calc(100%-128px)] p-2 overflow-y-scroll scroll-smooth scrollbar-thin scrollbar-thumb-red-700">
-      {messages.map((message) => (
+      {messages.length > 0 ? messages?.map((message) => (
         <Message key={message.id} message={message} />
-      ))}
+      )) : <p className="text-center font-bold">Search for users to say Hi! :D</p>}
     </div>
   )
 }

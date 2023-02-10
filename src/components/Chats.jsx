@@ -42,7 +42,8 @@ function Chats() {
             />
             <div>
               <span className="font-bold text-lg">
-                {chat[1].userInfo.displayName}
+                {chat[1].userInfo.displayName?.charAt(0).toUpperCase() +
+                  chat[1].userInfo.displayName?.slice(1)}
               </span>
               <p className="opacity-70 text-sm -mt-1">
                 {chat[1].lastMessage?.text}

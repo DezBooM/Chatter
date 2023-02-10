@@ -26,7 +26,7 @@ function Login() {
     <div className="min-h-screen flex justify-center items-center">
       <div className="flex flex-col justify-center items-center bg-red-700 px-20 py-10 rounded-lg">
         <h1 className="text-2xl -mt-5 mb-2">
-          Welcome to {" "}
+          Welcome to{" "}
           <span className="text-green-500 underline font-bold">Chatter!</span>
         </h1>
         <p>Login</p>
@@ -35,6 +35,7 @@ function Login() {
             className="bg-transparent placeholder:text-green-500 outline-none border-b rounded px-4 py-1"
             type="email"
             placeholder="Email"
+            autoComplete="Email"
           />
           <input
             className="bg-transparent placeholder:text-green-500 outline-none border-b rounded px-4 py-1"

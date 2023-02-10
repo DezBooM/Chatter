@@ -14,7 +14,7 @@ function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const display = e.target[0].value
+    const display = e.target[0].value.toLowerCase()
     const email = e.target[1].value
     const pass = e.target[2].value
 
@@ -89,7 +89,11 @@ function Register() {
             />
             <label className="flex cursor-pointer" htmlFor="avatar">
               <span className="text-xl mr-2">
-                {image ?  <RiImageFill className="text-green-500" /> : <RiImageAddLine />}
+                {image ? (
+                  <RiImageFill className="text-green-500" />
+                ) : (
+                  <RiImageAddLine />
+                )}
               </span>
               Upload Avatar
             </label>

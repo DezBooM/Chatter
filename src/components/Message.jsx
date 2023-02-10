@@ -28,7 +28,9 @@ function Message({ message }) {
               : data.user.photoURL
           }
         />
-        <span className="text-xs opacity-80 pl-2">{message.date}</span>
+        <span className="text-xs opacity-80 pl-2">
+          {message.date.split(" ")[1]}
+        </span>
       </div>
       <div
         className={`max-w-[80%] ${
@@ -39,7 +41,7 @@ function Message({ message }) {
       >
         {message.text && (
           <p
-            className={`px-5 py-3 my-1 max-w-max ${
+            className={`px-3 pt-2 pb-1 mt-3 max-w-max ${
               message.senderId === currentUser.uid
                 ? "rounded-b-md rounded-tl-md bg-red-700"
                 : "rounded-b-md rounded-tr-md bg-green-900"

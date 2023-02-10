@@ -25,10 +25,13 @@ function Input() {
                 id: uuid(),
                 text,
                 senderId: currentUser.uid,
-                date: new Date().toLocaleTimeString("sr-RS", {
+                date: new Date().toLocaleDateString("sr-RS", {
                   hour12: false,
                   hour: "2-digit",
                   minute: "2-digit",
+                  year: "numeric",
+                  month: "numeric",
+                  day: "numeric",
                 }),
                 image: downloadURL,
               }),
@@ -48,6 +51,9 @@ function Input() {
             hour12: false,
             hour: "2-digit",
             minute: "2-digit",
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
           }),
         }),
       })
@@ -65,10 +71,9 @@ function Input() {
         },
         [data.chatId + ".date"]: serverTimestamp(),
       })
-
-      setText("")
-      setImage(null)
     }
+    setText("")
+    setImage(null)
   }
 
   const handleKey = (e) => {
@@ -93,7 +98,11 @@ function Input() {
         onChange={(e) => setImage(e.target.files[0])}
       />
       <label className="cursor-pointer text-3xl" htmlFor="image">
-        {image ? <RiImageFill className="text-green-500" /> : <RiImageAddLine />}
+        {image ? (
+          <RiImageFill className="text-green-500" />
+        ) : (
+          <RiImageAddLine />
+        )}
       </label>
       <button
         className="bg-red-700 hover:bg-red-900 px-2 pt-1 flex items-center rounded-md"

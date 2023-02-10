@@ -21,7 +21,10 @@ function Search() {
   const { dispatch } = useChatContext()
 
   const handleSearch = async () => {
-    const q = query(collection(db, "users"), where("displayName", "==", search))
+    const q = query(
+      collection(db, "users"),
+      where("displayName", "==", search.toLowerCase())
+    )
 
     try {
       const querySnapshot = await getDocs(q)
@@ -75,7 +78,7 @@ function Search() {
       <div className="border-b border-white">
         <input
           className="w-full bg-transparent outline-none placeholder:white placeholder:text-white placeholder:opacity-80"
-          placeholder="Search for users like Jane"
+          placeholder="Search for users like Petar"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={handleKey}
@@ -89,7 +92,7 @@ function Search() {
               className="w-14 h-14 rounded-full object-cover"
               src={user.photoURL}
             />
-            <span>{user.displayName}</span>
+            <span className="font-bold text-lg">{user.displayName?.charAt(0).toUpperCase() + user.displayName?.slice(1)}</span>
           </div>
         )}
       </div>

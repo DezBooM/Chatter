@@ -8,9 +8,14 @@ function Chat() {
   return (
     <div className="flex-[3]">
       <div className="bg-green-900 py-4 h-16">
-        <h1 className="text-center text-2xl">{data.user?.displayName}</h1>
+        <h1 className="text-center text-2xl">
+          {data.user?.displayName
+            ? data.user?.displayName?.charAt(0).toUpperCase() +
+              data.user?.displayName?.slice(1)
+            : "Welcome to Chatter"}
+        </h1>
       </div>
-      <Messages />
+      {<Messages />}
       <Input />
     </div>
   )
