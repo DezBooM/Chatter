@@ -27,17 +27,17 @@ function Login() {
       <div className="flex flex-col justify-center items-center bg-red-700 px-20 py-10 rounded-lg">
         <h1 className="text-2xl -mt-5 mb-2">
           Welcome to {" "}
-          <span className="text-green-700 underline font-bold">Chatter!</span>
+          <span className="text-green-500 underline font-bold">Chatter!</span>
         </h1>
         <p>Login</p>
         <form className="flex flex-col gap-3 mt-1" onSubmit={handleSubmit}>
           <input
-            className="bg-transparent placeholder:text-green-700 outline-none border-b rounded px-4 py-1"
+            className="bg-transparent placeholder:text-green-500 outline-none border-b rounded px-4 py-1"
             type="email"
             placeholder="Email"
           />
           <input
-            className="bg-transparent placeholder:text-green-700 outline-none border-b rounded px-4 py-1"
+            className="bg-transparent placeholder:text-green-500 outline-none border-b rounded px-4 py-1"
             type="password"
             placeholder="Password"
           />
@@ -58,7 +58,7 @@ function Login() {
           You don't have account?{" "}
           <Link
             to="/register"
-            className="text-green-700 hover:text-white font-bold"
+            className="text-green-500 hover:text-white font-bold"
           >
             Register!
           </Link>

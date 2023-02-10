@@ -1,15 +1,9 @@
 import { useState } from "react"
-import { RiImageAddLine } from "react-icons/ri"
+import { RiImageAddLine, RiImageFill } from "react-icons/ri"
 import { useAuthContext } from "../contexts/AuthContext"
 import { useChatContext } from "../contexts/ChatContext"
 import { v4 as uuid } from "uuid"
-import {
-  arrayUnion,
-  doc,
-  serverTimestamp,
-  Timestamp,
-  updateDoc,
-} from "firebase/firestore"
+import { arrayUnion, doc, serverTimestamp, updateDoc } from "firebase/firestore"
 import { db, storage } from "../firebase"
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 
@@ -82,7 +76,7 @@ function Input() {
   }
 
   return (
-    <div className="bg-green-800 h-16 py-4 text-2xl flex items-center px-4 gap-2">
+    <div className="bg-green-900 h-16 py-4 text-2xl flex items-center px-4 gap-2">
       <input
         className="w-full px-1 bg-transparent outline-none placeholder:text-white placeholder:opacity-80 border-b border-white"
         type="text"
@@ -99,10 +93,10 @@ function Input() {
         onChange={(e) => setImage(e.target.files[0])}
       />
       <label className="cursor-pointer text-3xl" htmlFor="image">
-        <RiImageAddLine />
+        {image ? <RiImageFill className="text-green-500" /> : <RiImageAddLine />}
       </label>
       <button
-        className="bg-red-700 hover:bg-red-900 px-2 pt-1 flex items-center rounded-full"
+        className="bg-red-700 hover:bg-red-900 px-2 pt-1 flex items-center rounded-md"
         onClick={handleSend}
       >
         Send

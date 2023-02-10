@@ -15,7 +15,7 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-green-900 font-overpass text-white">
+    <div className="min-h-screen bg-green-700 font-overpass text-green-100">
       <Routes>
         <Route path="/">
           <Route

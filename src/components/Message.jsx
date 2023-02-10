@@ -15,13 +15,13 @@ function Message({ message }) {
   return (
     <div
       ref={ref}
-      className={`flex ${
+      className={`flex items-start ${
         message.senderId === currentUser.uid && "flex-row-reverse"
-      } mb-4`}
+      }`}
     >
       <div>
         <img
-          className="w-14 h-14 rounded-full object-cover"
+          className="w-14 h-14 rounded-full object-cover mr-2"
           src={
             message.senderId === currentUser.uid
               ? currentUser.photoURL
@@ -32,19 +32,17 @@ function Message({ message }) {
       </div>
       <div
         className={`max-w-[80%] ${
-          message.senderId === currentUser.uid ? "mr-5" : "ml-5"
-        } ${
           message.senderId === currentUser.uid
-            ? "flex justify-end items-center"
-            : "flex items-center"
+            ? "mr-1 flex flex-col justify-center items-end"
+            : "ml-1 flex flex-col justify-center"
         }`}
       >
         {message.text && (
           <p
-            className={`px-5 py-3 my-1 -mt-5 max-w-max ${
+            className={`px-5 py-3 my-1 max-w-max ${
               message.senderId === currentUser.uid
                 ? "rounded-b-md rounded-tl-md bg-red-700"
-                : "rounded-b-md rounded-tr-md bg-green-800"
+                : "rounded-b-md rounded-tr-md bg-green-900"
             } `}
           >
             {message.text}

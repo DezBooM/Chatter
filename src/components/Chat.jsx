@@ -7,7 +7,7 @@ function Chat() {
 
   return (
     <div className="flex-[3]">
-      <div className="bg-green-800 py-4 h-16">
+      <div className="bg-green-900 py-4 h-16">
         <h1 className="text-center text-2xl">{data.user?.displayName}</h1>
       </div>
       <Messages />

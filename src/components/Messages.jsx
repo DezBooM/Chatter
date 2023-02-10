@@ -19,7 +19,7 @@ function Messages() {
   }, [data.chatId])
 
   return (
-    <div className="h-[calc(100%-128px)] p-2 overflow-y-scroll">
+    <div className="h-[calc(100%-128px)] p-2 overflow-y-scroll scroll-smooth scrollbar-thin scrollbar-thumb-red-700">
       {messages.map((message) => (
         <Message key={message.id} message={message} />
       ))}
