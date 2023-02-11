@@ -15,7 +15,10 @@ function Navbar() {
           className="w-10 h-10 rounded-full object-cover mr-2"
           src={photoURL}
         />
-        <p>{displayName && displayName.charAt(0).toUpperCase() + displayName.slice(1)}</p>
+        <p>
+          {displayName &&
+            displayName.charAt(0).toUpperCase() + displayName.slice(1)}
+        </p>
         <button
           onClick={() => signOut(auth)}
           className="px-2 pt-1 text-sm rounded-md ml-2 outline-none bg-green-800 hover:bg-green-900"

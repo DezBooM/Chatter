@@ -15,7 +15,7 @@ function Chats() {
   const [chats, setChats] = useState([])
   const { currentUser } = useAuthContext()
   const { dispatch } = useChatContext()
-  console.log(chats)
+  
   const handleSelect = (user) => {
     dispatch({ type: "CHANGE_USER", payload: user })
   }
@@ -58,7 +58,7 @@ function Chats() {
       })
       await updateDoc(doc(db, "chats", combinedId), { messages: deleteField() })
       await deleteDoc(doc(db, "chats", combinedId))
-      dispatch({ type: "DELETE_CHAT" })
+      dispatch({ type: "REMOVE_MESSAGES_DATA" })
     } catch (err) {
       console.log(err)
     }

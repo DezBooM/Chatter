@@ -20,10 +20,10 @@ export function ChatContextProvider({ children }) {
               ? currentUser.uid + action.payload.uid
               : action.payload.uid + currentUser.uid,
         }
-      case "DELETE_CHAT":
+      case "REMOVE_MESSAGES_DATA":
         return {
-          user:{},
-          chatId: "null"
+          user: {},
+          chatId: "null",
         }
       default:
         return state

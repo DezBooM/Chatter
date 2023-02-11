@@ -89,6 +89,7 @@ function Input() {
         onChange={(e) => setText(e.target.value)}
         value={text}
         onKeyDown={handleKey}
+        disabled={data.chatId === "null"}
       />
       <input
         className="hidden"
@@ -96,6 +97,7 @@ function Input() {
         id="image"
         accept="image/jpg, image/jpeg, image/png"
         onChange={(e) => setImage(e.target.files[0])}
+        disabled={data.chatId === "null"}
       />
       <label className="cursor-pointer text-3xl" htmlFor="image">
         {image ? (

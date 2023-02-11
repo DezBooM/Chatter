@@ -50,7 +50,9 @@ function Message({ message }) {
             {message.text}
           </p>
         )}
-        {message.image && <img className="w-1/2 rounded-md" src={message.image} />}
+        {message.image && (
+          <img className="w-1/2 rounded-md" src={message.image} />
+        )}
       </div>
     </div>
   )
