@@ -1,4 +1,10 @@
-import { doc, onSnapshot } from "firebase/firestore"
+import {
+  deleteDoc,
+  deleteField,
+  doc,
+  onSnapshot,
+  updateDoc,
+} from "firebase/firestore"
 import { useEffect, useState } from "react"
 import { useAuthContext } from "../contexts/AuthContext"
 import { useChatContext } from "../contexts/ChatContext"
@@ -9,9 +15,53 @@ function Chats() {
   const [chats, setChats] = useState([])
   const { currentUser } = useAuthContext()
   const { dispatch } = useChatContext()
-
+  console.log(chats)
   const handleSelect = (user) => {
     dispatch({ type: "CHANGE_USER", payload: user })
+  }
+
+  const handleDelete = async (user) => {
+    const combinedId =
+      currentUser.uid > user.uid
+        ? currentUser.uid + user.uid
+        : user.uid + currentUser.uid
+
+    try {
+      await updateDoc(doc(db, "chats", combinedId), { messages: [] })
+      await updateDoc(doc(db, "userChats", currentUser.uid), {
+        [combinedId + ".userInfo"]: {
+          uid: deleteField(),
+          displayName: deleteField(),
+          photoURL: deleteField(),
+        },
+        [combinedId + ".userInfo"]: deleteField(),
+        [combinedId + "lastMessage"]: {
+          text: deleteField(),
+        },
+        [combinedId + "lastMessage"]: deleteField(),
+        [combinedId + ".date"]: deleteField(),
+        [combinedId]: deleteField(),
+      })
+      await updateDoc(doc(db, "userChats", user.uid), {
+        [combinedId + ".userInfo"]: {
+          uid: deleteField(),
+          displayName: deleteField(),
+          photoURL: deleteField(),
+        },
+        [combinedId + ".userInfo"]: deleteField(),
+        [combinedId + "lastMessage"]: {
+          text: deleteField(),
+        },
+        [combinedId + "lastMessage"]: deleteField(),
+        [combinedId + ".date"]: deleteField(),
+        [combinedId]: deleteField(),
+      })
+      await updateDoc(doc(db, "chats", combinedId), { messages: deleteField() })
+      await deleteDoc(doc(db, "chats", combinedId))
+      dispatch({ type: "DELETE_CHAT" })
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   useEffect(() => {
@@ -40,19 +90,23 @@ function Chats() {
             <div className="flex items-center gap-2 my-1 px-3 py-1">
               <img
                 className="w-14 h-14 rounded-full object-cover"
-                src={chat[1].userInfo.photoURL}
+                src={chat[1].userInfo?.photoURL}
               />
               <div>
                 <span className="font-bold text-lg">
-                  {chat[1].userInfo.displayName?.charAt(0).toUpperCase() +
-                    chat[1].userInfo.displayName?.slice(1)}
+                  {chat[1].userInfo?.displayName &&
+                    chat[1].userInfo?.displayName?.charAt(0).toUpperCase() +
+                      chat[1].userInfo?.displayName?.slice(1)}
                 </span>
-                <p className="opacity-70 text-sm -mt-1">
+                <p className="opacity-70 text-sm -mt-1 truncate w-52 tracking-tighter">
                   {chat[1].lastMessage?.text}
                 </p>
               </div>
             </div>
-            <div className="px-3 text-2xl">
+            <div
+              className="px-3 text-2xl cursor-pointer"
+              onClick={() => handleDelete(chat[1].userInfo)}
+            >
               <MdDelete />
             </div>
           </div>

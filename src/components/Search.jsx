@@ -9,18 +9,24 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useDebounce } from "use-debounce"
 import { useAuthContext } from "../contexts/AuthContext"
 import { useChatContext } from "../contexts/ChatContext"
 import { db } from "../firebase"
 
 function Search() {
   const [search, setSearch] = useState("")
+  const [debouncedValue] = useDebounce(search, 200)
   const [user, setUser] = useState(null)
   const { currentUser } = useAuthContext()
   const { dispatch } = useChatContext()
 
-  const handleSearch = async () => {
+  useEffect(() => {
+    if (debouncedValue) handleSearch(debouncedValue)
+  }, [debouncedValue])
+
+  const handleSearch = async (search) => {
     const q = query(
       collection(db, "users"),
       where("displayName", "==", search.toLowerCase())
@@ -36,7 +42,7 @@ function Search() {
   }
 
   const handleKey = (e) => {
-    e.key === "Enter" && handleSearch()
+    e.key === "Enter" && handleSearch(search)
   }
 
   const handleSelect = async () => {
