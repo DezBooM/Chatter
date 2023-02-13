@@ -1,13 +1,43 @@
-import { signInWithEmailAndPassword } from "firebase/auth"
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { auth } from "../firebase"
+import { auth, db } from "../firebase"
 import { SpinnerDotted } from "spinners-react"
+import { doc, getDoc, setDoc } from "firebase/firestore"
+import { FcGoogle } from "react-icons/fc"
 
 function Login() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const googleProvider = new GoogleAuthProvider()
   const navigate = useNavigate()
+
+  const handleGoogleAuth = async () => {
+    try {
+      const res = await signInWithPopup(auth, googleProvider)
+      const check = await getDoc(doc(db, "userChats", res.user.uid))
+      if (!check.exists()) {
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          displayName: res.user.displayName.split(" ")[0].toLowerCase(),
+          email: res.user.email,
+          photoURL: res.user.photoURL,
+        })
+        await setDoc(doc(db, "userChats", res.user.uid), {})
+      }
+      await updateProfile(res.user, {
+        displayName: res.user.displayName.split(" ")[0],
+      })
+      navigate("/")
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -55,13 +85,25 @@ function Login() {
               type="password"
               placeholder="Password"
             />
-            <button
-              className="bg-green-800 hover:bg-green-900 rounded-full pt-2 pb-1"
-              type="submit"
-              onSubmit={handleSubmit}
-            >
-              Login
-            </button>
+            <div className="flex flex-col gap-1.5">
+              <button
+                className="bg-green-800 hover:bg-green-900 rounded-full pt-2 pb-1"
+                type="submit"
+                onSubmit={handleSubmit}
+              >
+                Login
+              </button>
+              <button
+                className="bg-green-800 hover:bg-green-900 rounded-full pt-2 pb-1 flex justify-center items-center"
+                type="button"
+                onClick={handleGoogleAuth}
+              >
+                Sign in with Google{" "}
+                <span className="ml-1 mb-1 text-xl">
+                  <FcGoogle />
+                </span>
+              </button>
+            </div>
             {error && (
               <p className="text-sm pt-1 px-1 rounded-lg font-bold bg-green-100 text-red-700">
                 Email or password are invalid!
