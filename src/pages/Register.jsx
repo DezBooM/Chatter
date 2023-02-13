@@ -117,7 +117,7 @@ function Register() {
               </label>
             </div>
             <button
-              className="bg-green-800 hover:bg-green-900 rounded-full py-1"
+              className="bg-green-800 hover:bg-green-900 rounded-full pt-2 pb-1"
               type="submit"
               onSubmit={handleSubmit}
             >

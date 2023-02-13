@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom"
 import { useAuthContext } from "./contexts/AuthContext"
 import Home from "./pages/Home"
 import Login from "./pages/Login"
+import PasswordReset from "./pages/PasswordReset"
 import Register from "./pages/Register"
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="password-reset" element={<PasswordReset />} />
         </Route>
       </Routes>
     </div>
