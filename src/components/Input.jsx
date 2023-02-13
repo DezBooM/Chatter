@@ -36,6 +36,19 @@ function Input() {
                 image: downloadURL,
               }),
             })
+            await updateDoc(doc(db, "userChats", currentUser.uid), {
+              [data.chatId + ".lastMessage"]: {
+                text: "Photo",
+              },
+              [data.chatId + ".date"]: serverTimestamp(),
+            })
+
+            await updateDoc(doc(db, "userChats", data.user.uid), {
+              [data.chatId + ".lastMessage"]: {
+                text: "Photo",
+              },
+              [data.chatId + ".date"]: serverTimestamp(),
+            })
           } catch (err) {
             console.log(err)
           }
@@ -57,7 +70,6 @@ function Input() {
           }),
         }),
       })
-
       await updateDoc(doc(db, "userChats", currentUser.uid), {
         [data.chatId + ".lastMessage"]: {
           text,
@@ -66,6 +78,13 @@ function Input() {
       })
 
       await updateDoc(doc(db, "userChats", data.user.uid), {
+        [data.chatId + ".lastMessage"]: {
+          text,
+        },
+        [data.chatId + ".date"]: serverTimestamp(),
+      })
+
+      await updateDoc(doc(db, "userChats", currentUser.uid), {
         [data.chatId + ".lastMessage"]: {
           text,
         },

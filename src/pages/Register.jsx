@@ -73,24 +73,24 @@ function Register() {
         <div className="flex flex-col justify-center items-center bg-red-700 px-20 py-10 rounded-lg">
           <h1 className="text-2xl -mt-5 mb-2">
             Welcome to{" "}
-            <span className="text-green-500 underline font-bold">Chatter!</span>
+            <span className="text-green-600 underline font-bold">Chatter!</span>
           </h1>
           <p>Register</p>
           <form className="flex flex-col gap-3 mt-2" onSubmit={handleSubmit}>
             <input
-              className="bg-transparent placeholder:text-green-500 outline-none border-b rounded p-1"
+              className="bg-transparent placeholder:text-green-600 outline-none border-b rounded p-1"
               type="text"
               placeholder="Display name"
               required
             />
             <input
-              className="bg-transparent placeholder:text-green-500 outline-none border-b rounded p-1"
+              className="bg-transparent placeholder:text-green-600 outline-none border-b rounded p-1"
               type="email"
               placeholder="Email"
               required
             />
             <input
-              className="bg-transparent placeholder:text-green-500 outline-none border-b rounded p-1"
+              className="bg-transparent placeholder:text-green-600 outline-none border-b rounded p-1"
               type="password"
               minLength={6}
               placeholder="Password"
@@ -108,7 +108,7 @@ function Register() {
               <label className="flex cursor-pointer" htmlFor="avatar">
                 <span className="text-xl mr-2">
                   {image ? (
-                    <RiImageFill className="text-green-500" />
+                    <RiImageFill className="text-green-600" />
                   ) : (
                     <RiImageAddLine />
                   )}
@@ -138,7 +138,7 @@ function Register() {
             You already registered?
             <Link
               to="/login"
-              className="text-green-500 hover:text-white font-bold"
+              className="text-green-600 hover:text-white font-bold"
             >
               {" "}
               Login!

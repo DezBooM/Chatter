@@ -15,7 +15,7 @@ function Chats() {
   const [chats, setChats] = useState([])
   const { currentUser } = useAuthContext()
   const { dispatch } = useChatContext()
-  
+console.log(chats)
   const handleSelect = (user) => {
     dispatch({ type: "CHANGE_USER", payload: user })
   }

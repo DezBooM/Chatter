@@ -23,7 +23,12 @@ function Search() {
   const { dispatch } = useChatContext()
 
   useEffect(() => {
-    if (debouncedValue) handleSearch(debouncedValue)
+    if (debouncedValue) {
+      handleSearch(debouncedValue)
+    }
+    if (search !== user?.displayName) {
+      setUser(null)
+    }
   }, [debouncedValue])
 
   const handleSearch = async (search) => {
@@ -38,7 +43,9 @@ function Search() {
       querySnapshot.forEach((doc) => {
         setUser(doc.data())
       })
-    } catch (err) {}
+    } catch (err) {
+      console.log(err)
+    }
   }
 
   const handleKey = (e) => {

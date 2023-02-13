@@ -35,8 +35,8 @@ function Message({ message }) {
       <div
         className={`max-w-[80%] ${
           message.senderId === currentUser.uid
-            ? "mr-1 flex flex-col justify-center items-end"
-            : "ml-1 flex flex-col justify-center"
+            ? "mr-3 flex flex-col justify-center items-end"
+            : "ml-3 flex flex-col justify-center"
         }`}
       >
         {message.text && (
