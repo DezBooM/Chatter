@@ -1,4 +1,5 @@
 import {
+  FacebookAuthProvider,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
@@ -10,16 +11,40 @@ import { auth, db } from "../firebase"
 import { SpinnerDotted } from "spinners-react"
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { FcGoogle } from "react-icons/fc"
+import { FaFacebook } from "react-icons/fa"
 
 function Login() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
   const googleProvider = new GoogleAuthProvider()
+  const facebookProvider = new FacebookAuthProvider()
   const navigate = useNavigate()
 
   const handleGoogleAuth = async () => {
     try {
       const res = await signInWithPopup(auth, googleProvider)
+      const check = await getDoc(doc(db, "userChats", res.user.uid))
+      if (!check.exists()) {
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          displayName: res.user.displayName.split(" ")[0].toLowerCase(),
+          email: res.user.email,
+          photoURL: res.user.photoURL,
+        })
+        await setDoc(doc(db, "userChats", res.user.uid), {})
+      }
+      await updateProfile(res.user, {
+        displayName: res.user.displayName.split(" ")[0],
+      })
+      navigate("/")
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const handleFacebookAuth = async () => {
+    try {
+      const res = await signInWithPopup(auth, facebookProvider)
       const check = await getDoc(doc(db, "userChats", res.user.uid))
       if (!check.exists()) {
         await setDoc(doc(db, "users", res.user.uid), {
@@ -101,6 +126,16 @@ function Login() {
                 Sign in with Google{" "}
                 <span className="ml-1 mb-1 text-xl">
                   <FcGoogle />
+                </span>
+              </button>
+              <button
+                className="bg-green-800 hover:bg-green-900 rounded-full px-3 pt-2 pb-1 flex justify-center items-center"
+                type="button"
+                onClick={handleFacebookAuth}
+              >
+                Sign in with Facebook{" "}
+                <span className="ml-1 mb-1 text-xl">
+                  <FaFacebook />
                 </span>
               </button>
             </div>
