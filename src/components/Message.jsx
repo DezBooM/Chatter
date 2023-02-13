@@ -33,7 +33,7 @@ function Message({ message }) {
         </span>
       </div>
       <div
-        className={`max-w-[80%] ${
+        className={`max-w-[60%] sm:max-w-[80%] ${
           message.senderId === currentUser.uid
             ? "mr-3 flex flex-col justify-center items-end"
             : "ml-3 flex flex-col justify-center"
@@ -41,7 +41,7 @@ function Message({ message }) {
       >
         {message.text && (
           <p
-            className={`px-3 pt-2 pb-1 mt-2 max-w-max ${
+            className={`leading-tight sm:leading-normal text-sm sm:text-base px-3 pt-2 pb-1 mt-2 max-w-max ${
               message.senderId === currentUser.uid
                 ? "rounded-b-md rounded-tl-md bg-red-700"
                 : "rounded-b-md rounded-tr-md bg-green-900"
@@ -51,7 +51,7 @@ function Message({ message }) {
           </p>
         )}
         {message.image && (
-          <img className="w-1/2 rounded-md" src={message.image} />
+          <img className="w-2/3 sm:w-1/2 rounded-md" src={message.image} />
         )}
       </div>
     </div>

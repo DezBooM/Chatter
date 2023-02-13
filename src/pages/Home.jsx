@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar"
 
 function Home() {
   return (
-    <div className="h-screen flex">
+    <div className="min-h-screen sm:flex">
       <Sidebar />
       <Chat />
     </div>

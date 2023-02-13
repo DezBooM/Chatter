@@ -98,7 +98,7 @@ function Chats() {
                     chat[1].userInfo?.displayName?.charAt(0).toUpperCase() +
                       chat[1].userInfo?.displayName?.slice(1)}
                 </span>
-                <p className="opacity-70 text-sm -mt-1 truncate w-52 tracking-tighter">
+                <p className="opacity-70 text-sm -mt-1 truncate w-44 sm:w-52 tracking-tighter">
                   {chat[1].lastMessage?.text}
                 </p>
               </div>

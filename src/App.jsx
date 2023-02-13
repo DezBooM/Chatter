@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Navigate, Route, Routes } from "react-router-dom"
 import { useAuthContext } from "./contexts/AuthContext"
 import Home from "./pages/Home"
