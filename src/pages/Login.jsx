@@ -3,6 +3,7 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  signInWithRedirect,
   updateProfile,
 } from "firebase/auth"
 import { useEffect, useState } from "react"
@@ -22,21 +23,39 @@ function Login() {
 
   const handleGoogleAuth = async () => {
     try {
-      const res = await signInWithPopup(auth, googleProvider)
-      const check = await getDoc(doc(db, "userChats", res.user.uid))
-      if (!check.exists()) {
-        await setDoc(doc(db, "users", res.user.uid), {
-          uid: res.user.uid,
-          displayName: res.user.displayName.split(" ")[0].toLowerCase(),
-          email: res.user.email,
-          photoURL: res.user.photoURL,
+      if (navigator.userAgentData.mobile) {
+        const res = await signInWithRedirect(auth, googleProvider)
+        const check = await getDoc(doc(db, "userChats", res.user.uid))
+        if (!check.exists()) {
+          await setDoc(doc(db, "users", res.user.uid), {
+            uid: res.user.uid,
+            displayName: res.user.displayName.split(" ")[0].toLowerCase(),
+            email: res.user.email,
+            photoURL: res.user.photoURL,
+          })
+          await setDoc(doc(db, "userChats", res.user.uid), {})
+        }
+        await updateProfile(res.user, {
+          displayName: res.user.displayName.split(" ")[0],
         })
-        await setDoc(doc(db, "userChats", res.user.uid), {})
+        navigate("/")
+      } else {
+        const res = await signInWithPopup(auth, googleProvider)
+        const check = await getDoc(doc(db, "userChats", res.user.uid))
+        if (!check.exists()) {
+          await setDoc(doc(db, "users", res.user.uid), {
+            uid: res.user.uid,
+            displayName: res.user.displayName.split(" ")[0].toLowerCase(),
+            email: res.user.email,
+            photoURL: res.user.photoURL,
+          })
+          await setDoc(doc(db, "userChats", res.user.uid), {})
+        }
+        await updateProfile(res.user, {
+          displayName: res.user.displayName.split(" ")[0],
+        })
+        navigate("/")
       }
-      await updateProfile(res.user, {
-        displayName: res.user.displayName.split(" ")[0],
-      })
-      navigate("/")
     } catch (err) {
       console.log(err)
     }
