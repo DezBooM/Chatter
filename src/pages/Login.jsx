@@ -1,13 +1,11 @@
 import {
-  FacebookAuthProvider,
-  GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
   updateProfile,
 } from "firebase/auth"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { auth, db } from "../firebase"
+import { auth, db, facebookProvider, googleProvider } from "../firebase"
 import { SpinnerDotted } from "spinners-react"
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { FcGoogle } from "react-icons/fc"
@@ -16,8 +14,7 @@ import { FaFacebook } from "react-icons/fa"
 function Login() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
-  const googleProvider = new GoogleAuthProvider()
-  const facebookProvider = new FacebookAuthProvider()
+
   const navigate = useNavigate()
 
   const handleGoogleAuth = async () => {
