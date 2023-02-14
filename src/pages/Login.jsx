@@ -3,7 +3,6 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-  signInWithRedirect,
   updateProfile,
 } from "firebase/auth"
 import { useEffect, useState } from "react"
@@ -23,39 +22,21 @@ function Login() {
 
   const handleGoogleAuth = async () => {
     try {
-      if (navigator.userAgentData.mobile) {
-        const res = await signInWithRedirect(auth, googleProvider)
-        const check = await getDoc(doc(db, "userChats", res.user.uid))
-        if (!check.exists()) {
-          await setDoc(doc(db, "users", res.user.uid), {
-            uid: res.user.uid,
-            displayName: res.user.displayName.split(" ")[0].toLowerCase(),
-            email: res.user.email,
-            photoURL: res.user.photoURL,
-          })
-          await setDoc(doc(db, "userChats", res.user.uid), {})
-        }
-        await updateProfile(res.user, {
-          displayName: res.user.displayName.split(" ")[0],
+      const res = await signInWithPopup(auth, googleProvider)
+      const check = await getDoc(doc(db, "userChats", res.user.uid))
+      if (!check.exists()) {
+        await setDoc(doc(db, "users", res.user.uid), {
+          uid: res.user.uid,
+          displayName: res.user.displayName.split(" ")[0].toLowerCase(),
+          email: res.user.email,
+          photoURL: res.user.photoURL,
         })
-        navigate("/")
-      } else {
-        const res = await signInWithPopup(auth, googleProvider)
-        const check = await getDoc(doc(db, "userChats", res.user.uid))
-        if (!check.exists()) {
-          await setDoc(doc(db, "users", res.user.uid), {
-            uid: res.user.uid,
-            displayName: res.user.displayName.split(" ")[0].toLowerCase(),
-            email: res.user.email,
-            photoURL: res.user.photoURL,
-          })
-          await setDoc(doc(db, "userChats", res.user.uid), {})
-        }
-        await updateProfile(res.user, {
-          displayName: res.user.displayName.split(" ")[0],
-        })
-        navigate("/")
+        await setDoc(doc(db, "userChats", res.user.uid), {})
       }
+      await updateProfile(res.user, {
+        displayName: res.user.displayName.split(" ")[0],
+      })
+      navigate("/")
     } catch (err) {
       console.log(err)
     }
@@ -123,11 +104,13 @@ function Login() {
               type="email"
               placeholder="Email"
               autoComplete="Email"
+              required
             />
             <input
               className="bg-transparent placeholder:text-green-600 outline-none border-b rounded px-4 py-1"
               type="password"
               placeholder="Password"
+              required
             />
             <div className="flex flex-col gap-1.5">
               <button
