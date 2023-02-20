@@ -115,27 +115,28 @@ function Login() {
                 type="submit"
                 onSubmit={handleSubmit}
               >
-                Login
+                Login with Email
               </button>
               <button
-                className="bg-green-800 hover:bg-green-900 rounded-full pt-2 pb-1 flex justify-center items-center"
+                className="bg-green-800 hover:bg-green-900 rounded-full px-4 pt-2 pb-1 flex items-center"
                 type="button"
                 onClick={handleGoogleAuth}
               >
-                Sign in with Google{" "}
-                <span className="ml-1 mb-1 text-xl">
+                {" "}
+                <span className="mr-1 mb-1 text-xl">
                   <FcGoogle />
                 </span>
+                Sign in with Google{" "}
               </button>
               <button
-                className="bg-green-800 hover:bg-green-900 rounded-full px-3 pt-2 pb-1 flex justify-center items-center"
+                className="bg-green-800 hover:bg-green-900 rounded-full px-4 pt-2 pb-1 flex items-center"
                 type="button"
                 onClick={handleFacebookAuth}
               >
-                Sign in with Facebook{" "}
-                <span className="ml-1 mb-1 text-xl">
+                <span className="mr-1 mb-1 text-xl text-[#4267B2] bg-white rounded-full">
                   <FaFacebook />
                 </span>
+                Sign in with Facebook{" "}
               </button>
             </div>
             {error && (
