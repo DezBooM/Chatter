@@ -5,7 +5,7 @@ import { useChatContext } from "../contexts/ChatContext"
 function Message({ message }) {
   const { currentUser } = useAuthContext()
   const { data } = useChatContext()
-
+  console.log(message.date.slice(-5))
   const ref = useRef(null)
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function Message({ message }) {
           }
         />
         <span className="text-xs opacity-80 pl-2">
-          {message.date.split(" ")[1]}
+          {message.date.slice(-5)}
         </span>
       </div>
       <div

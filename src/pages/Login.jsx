@@ -33,7 +33,7 @@ function Login() {
       await updateProfile(res.user, {
         displayName: res.user.displayName.split(" ")[0],
       })
-      navigate("/")
+      navigate("/", { replace: true })
     } catch (err) {
       console.log(err)
     }
@@ -55,7 +55,7 @@ function Login() {
       await updateProfile(res.user, {
         displayName: res.user.displayName.split(" ")[0],
       })
-      navigate("/")
+      navigate("/", { replace: true })
     } catch (err) {
       console.log(err)
     }
@@ -70,7 +70,7 @@ function Login() {
 
     try {
       await signInWithEmailAndPassword(auth, email, pass)
-      navigate("/")
+      navigate("/", { replace: true })
     } catch (err) {
       setError(true)
       console.log(err)
