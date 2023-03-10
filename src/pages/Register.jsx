@@ -73,7 +73,7 @@ function Register() {
         <SpinnerDotted size="150" color="rgb(185 28 28)" />
       ) : (
         <div className="flex flex-col justify-center items-center bg-red-700 px-20 py-10 rounded-lg">
-          <h1 className="text-2xl -mt-5 mb-2">
+          <h1 className="text-xl scale-125 sm:scale-100 tracking-tighter sm:text-2xl -mt-5 mb-2">
             Welcome to{" "}
             <span className="text-green-600 underline font-bold">Chatter!</span>
           </h1>

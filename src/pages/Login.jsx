@@ -89,8 +89,8 @@ function Login() {
       {loading ? (
         <SpinnerDotted size="150" color="rgb(185 28 28)" />
       ) : (
-        <div className="flex flex-col justify-center items-center bg-red-700 px-20 py-10 rounded-lg w-full">
-          <h1 className="text-xl tracking-tighter sm:text-2xl -mt-5 mb-2">
+        <div className="flex flex-col justify-center items-center bg-red-700 px-20 py-10 rounded-lg">
+          <h1 className="text-xl scale-125 sm:scale-100 tracking-tighter sm:text-2xl -mt-5 mb-2">
             Welcome to{" "}
             <span className="text-green-600 underline-offset-4 underline font-bold">
               Chatter!
@@ -133,22 +133,22 @@ function Login() {
                 Login with Email
               </button>
               <button
-                className="bg-green-800 hover:bg-green-900 rounded-full px-4 pt-2 pb-1 flex items-center"
+                className="bg-green-800 hover:bg-green-900 rounded-full px-4 pt-2 pb-1 flex items-center leading-4"
                 type="button"
                 onClick={handleGoogleAuth}
               >
                 {" "}
-                <span className="mr-1 mb-1 text-xl leading-3">
+                <span className="mr-1 mb-1 text-xl">
                   <FcGoogle />
                 </span>
                 Sign in with Google{" "}
               </button>
               <button
-                className="bg-green-800 hover:bg-green-900 rounded-full px-4 pt-2 pb-1 flex items-center"
+                className="bg-green-800 hover:bg-green-900 rounded-full px-4 pt-2 pb-1 flex items-center leading-4"
                 type="button"
                 onClick={handleFacebookAuth}
               >
-                <span className="mr-1 mb-1 text-xl text-[#4267B2] bg-white rounded-full leading-3">
+                <span className="mr-1 mb-1 text-xl text-[#4267B2] bg-white rounded-full">
                   <FaFacebook />
                 </span>
                 Sign in with Facebook{" "}
