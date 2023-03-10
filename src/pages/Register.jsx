@@ -7,12 +7,14 @@ import { doc, setDoc } from "firebase/firestore"
 import { Link, useNavigate } from "react-router-dom"
 import { v4 as uuid } from "uuid"
 import { SpinnerDotted } from "spinners-react"
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
 
 function Register() {
   const [error, setError] = useState(false)
   const [image, setImage] = useState(null)
   const [isAvatar, setIsAvatar] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [showPass, setShowPass] = useState(false)
   const navigate = useNavigate()
 
   const handleSubmit = async (e) => {
@@ -89,13 +91,25 @@ function Register() {
               placeholder="Email"
               required
             />
-            <input
-              className="bg-transparent placeholder:text-green-600 outline-none border-b rounded p-1"
-              type="password"
-              minLength={6}
-              placeholder="Password"
-              required
-            />
+            <div className="flex relative">
+              <input
+                className="bg-transparent placeholder:text-green-600 outline-none border-b rounded p-1 w-full pr-8"
+                type={showPass ? "text" : "password"}
+                placeholder="Password"
+                required
+              />
+              {!showPass ? (
+                <AiFillEyeInvisible
+                  className="absolute right-1 text-2xl top-1 text-green-600"
+                  onClick={() => setShowPass(true)}
+                />
+              ) : (
+                <AiFillEye
+                  className="absolute right-1 text-2xl top-1 text-green-600"
+                  onClick={() => setShowPass(false)}
+                />
+              )}
+            </div>
             <div>
               <input
                 className="hidden"

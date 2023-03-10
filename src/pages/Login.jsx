@@ -10,10 +10,12 @@ import { SpinnerDotted } from "spinners-react"
 import { doc, getDoc, setDoc } from "firebase/firestore"
 import { FcGoogle } from "react-icons/fc"
 import { FaFacebook } from "react-icons/fa"
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai"
 
 function Login() {
   const [error, setError] = useState(false)
   const [loading, setLoading] = useState(false)
+  const [showPass, setShowPass] = useState(false)
 
   const navigate = useNavigate()
 
@@ -103,12 +105,25 @@ function Login() {
               autoComplete="Email"
               required
             />
-            <input
-              className="bg-transparent placeholder:text-green-600 outline-none border-b rounded px-4 py-1"
-              type="password"
-              placeholder="Password"
-              required
-            />
+            <div className="flex relative">
+              <input
+                className="bg-transparent placeholder:text-green-600 outline-none border-b rounded px-4 py-1 w-full pr-8"
+                type={showPass ? "text" : "password"}
+                placeholder="Password"
+                required
+              />
+              {!showPass ? (
+                <AiFillEyeInvisible
+                  className="absolute right-1 text-2xl top-1 text-green-600"
+                  onClick={() => setShowPass(true)}
+                />
+              ) : (
+                <AiFillEye
+                  className="absolute right-1 text-2xl top-1 text-green-600"
+                  onClick={() => setShowPass(false)}
+                />
+              )}
+            </div>
             <div className="flex flex-col gap-1.5">
               <button
                 className="bg-green-800 hover:bg-green-900 rounded-full pt-2 pb-1"
